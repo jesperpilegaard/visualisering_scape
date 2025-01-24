@@ -1,0 +1,11 @@
+Task,Task Count,Error Count,Mean Error per Task
+WaitForPickObjectToComplete,1020,56632,55.52156862745098
+GetSensorType,83,1946,23.44578313253012
+IsReady,51,1049,20.568627450980394
+TransferTasksToRobot,14490,122513,8.455003450655624
+InternalRecognizeWithIteration,3311,10487,3.167321051041981
+StartOfCycle,1207,3228,2.6743993371996684
+PerformHeightInitialization,34,36,1.0588235294117647
+GetS0ensorType,1,1,1.0
+InitializeProductGroup,43,0,0.0
+PickObject,1170,0,0.0

@@ -1,0 +1,29 @@
+/* styles.css */
+
+/* General background for the app */
+body {
+    background: linear-gradient(to bottom, #F0F8F5, #DDEFE8); /* Soft green gradient */
+    color: #333333; /* Default text color for better contrast */
+    font-family: 'Arial', sans-serif; /* Clean, modern font */
+}
+
+/* Optional: Style the main content container */
+[data-testid="stAppViewContainer"] {
+    background: #F4F9F7; /* Light pastel green */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Optional: Style the header/subheader for a cleaner look */
+h1, h2, h3, h4, h5, h6 {
+    color: #4CAF50; /* Pleasant green for headers */
+    font-weight: bold;
+}
+
+.stSlider > div[data-baseweb="slider"] > div > div > div {
+    background: linear-gradient(to right, #4CAF50, #81C784); /* Green gradient */
+}
+.stSlider > div[data-baseweb="slider"] > div > div > div:nth-child(2) {
+    background: #2d8d30; /* Slider handle */
+}
