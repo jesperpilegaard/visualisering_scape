@@ -233,6 +233,8 @@ data["Date"] = data["DateTime"].dt.date  # Ekstraher dato
 
 st.sidebar.subheader("Compare Tasks Across Two Time Intervals:")
 
+st.sidebar.subheader("Compare Tasks Across Two Time Intervals:")
+
 # Multiselect for picking tasks
 selected_tasks = st.sidebar.multiselect("Select tasks for comparison", data["Task"].unique(), default=["FullCycle"])
 
@@ -240,8 +242,10 @@ selected_tasks = st.sidebar.multiselect("Select tasks for comparison", data["Tas
 available_dates = data["Date"].unique()
 available_dates.sort()  # Sortér datoerne
 
-# Date picker for a single date
-selected_date = st.sidebar.selectbox("Pick a date for comparison", options=available_dates)
+# Date pickers for selecting two dates
+st.sidebar.subheader("Select Dates for Comparison")
+selected_date_1 = st.sidebar.selectbox("Pick Date 1 for comparison", options=available_dates)
+selected_date_2 = st.sidebar.selectbox("Pick Date 2 for comparison", options=available_dates)
 
 # Time interval 1 selection
 st.sidebar.subheader("Time Interval 1")
@@ -257,22 +261,24 @@ end_time_2 = st.sidebar.time_input("End time (Interval 2)", value=pd.Timestamp("
 if start_time_1 >= end_time_1 or start_time_2 >= end_time_2:
     st.warning("End time must be after start time for both intervals.")
 else:
-    # Combine date with time intervals
-    start_datetime_1 = pd.Timestamp.combine(selected_date, start_time_1)
-    end_datetime_1 = pd.Timestamp.combine(selected_date, end_time_1)
-    start_datetime_2 = pd.Timestamp.combine(selected_date, start_time_2)
-    end_datetime_2 = pd.Timestamp.combine(selected_date, end_time_2)
+    # Combine date with time intervals for both selected dates
+    start_datetime_1 = pd.Timestamp.combine(selected_date_1, start_time_1)
+    end_datetime_1 = pd.Timestamp.combine(selected_date_1, end_time_1)
+    start_datetime_2 = pd.Timestamp.combine(selected_date_2, start_time_2)
+    end_datetime_2 = pd.Timestamp.combine(selected_date_2, end_time_2)
 
-    # Filter data for each time interval
+    # Filter data for each time interval and date
     filtered_data_1 = data[
         (data["Task"].isin(selected_tasks)) &
-        (data["DateTime"] >= start_datetime_1) &
-        (data["DateTime"] <= end_datetime_1)
+        (data["DateTime"] >= start_datetime_1) & 
+        (data["DateTime"] <= end_datetime_1) &
+        (data["Date"] == selected_date_1)  # Add date filter
     ]
     filtered_data_2 = data[
         (data["Task"].isin(selected_tasks)) &
         (data["DateTime"] >= start_datetime_2) &
-        (data["DateTime"] <= end_datetime_2)
+        (data["DateTime"] <= end_datetime_2) &
+        (data["Date"] == selected_date_2)  # Add date filter
     ]
 
     # Check if there is data for both intervals
@@ -281,10 +287,10 @@ else:
     else:
         # Calculate the mean duration for each task and interval
         mean_duration_1 = filtered_data_1.groupby(["Task"])["Duration"].mean().reset_index()
-        mean_duration_1["Interval"] = "Interval 1"  # Label for interval 1
+        mean_duration_1["Interval"] = f"Interval 1 ({selected_date_1})"  # Label for interval 1
 
         mean_duration_2 = filtered_data_2.groupby(["Task"])["Duration"].mean().reset_index()
-        mean_duration_2["Interval"] = "Interval 2"  # Label for interval 2
+        mean_duration_2["Interval"] = f"Interval 2 ({selected_date_2})"  # Label for interval 2
 
         # Combine the two dataframes
         comparison_data = pd.concat([mean_duration_1, mean_duration_2])
@@ -296,7 +302,7 @@ else:
             y="Duration",  # Y-axis as the mean duration
             color="Interval",  # Color bars by interval
             barmode="group",  # Group bars by task and interval
-            title=f"Average Task Duration Comparison ({selected_date})",
+            title=f"Average Task Duration Comparison ({selected_date_1} vs {selected_date_2})",
             labels={"Task": "Task Type", "Duration": "Average Duration (seconds)", "Interval": "Time Interval"},
         )
 
