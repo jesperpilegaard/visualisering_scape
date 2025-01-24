@@ -3,6 +3,5 @@ pandas
 streamlit_plotly_events
 plotly
 plotly.express
-warnings
 re
 datetime
