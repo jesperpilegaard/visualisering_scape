@@ -1,6 +1,5 @@
 streamlit
 pandas
-os
 streamlit_plotly_events
 plotly
 plotly.express
