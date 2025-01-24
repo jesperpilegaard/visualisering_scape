@@ -39,7 +39,9 @@ If you have a new log file that needs to be processed before displaying its stat
 2. Run the parser with the following command:
 python combined_parser.py
 
-3. Once processed, the new data will be ready to view in the Streamlit app.
+3. Upload any images related to the log file to the images directory.
+
+4. Once processed, the new data will be ready to view in the Streamlit app.
 
 ## Notes
 
