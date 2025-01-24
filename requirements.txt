@@ -1,2 +1,9 @@
+streamlit
+pandas
+os
+streamlit_plotly_events
 plotly
-plotly_express
+plotly.express
+warnings
+re
+datetime
