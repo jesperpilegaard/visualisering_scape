@@ -9,6 +9,7 @@ warnings.filterwarnings('ignore')
 st.set_page_config(page_title="Logdata Visualization", page_icon=":bar_chart:", layout="wide")
 
 st.title(" :bar_chart: Logdata Visualization")
+st.subheader("This dashboard is created with synthetic data solely for demonstration purposes.")
 st.markdown('<style>div.block-container{padding-top:2rem;}</style>', unsafe_allow_html=True)
 
 # Arbejdsmappen sættes automatisk af din Streamlit app
