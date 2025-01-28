@@ -234,8 +234,6 @@ data["Date"] = data["DateTime"].dt.date  # Ekstraher dato
 
 st.sidebar.subheader("Compare Tasks Across Two Time Intervals:")
 
-st.sidebar.subheader("Compare Tasks Across Two Time Intervals:")
-
 # Multiselect for picking tasks
 selected_tasks = st.sidebar.multiselect("Select tasks for comparison", data["Task"].unique(), default=["FullCycle"])
 
