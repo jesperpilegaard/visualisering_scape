@@ -25,7 +25,7 @@ if fl is not None:
     st.write(filename)
     df = pd.read_csv(fl, encoding="ISO-8859-1")  # Læs direkte fra fil-uploader objektet
 else:
-    df = pd.read_csv("Data/test_logdata.csv", encoding="ISO-8859-1")  # Brug relativ sti til standardfil
+    df = pd.read_csv("Data/sorted_data.csv", encoding="ISO-8859-1")  # Brug relativ sti til standardfil
 
 task_distribution = df['Task'].value_counts().reset_index()
 task_distribution.columns = ['Task', 'Count']
